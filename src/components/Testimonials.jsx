@@ -5,20 +5,17 @@ const testimonials = [
     {
         name: 'Rahim Ahmed',
         role: 'Football Player',
-        comment:
-            'SportNest makes booking so easy. I can find nearby grounds instantly and book without any hassle.',
+        comment: 'SportNest makes booking so easy. I can find nearby grounds instantly and book without any hassle.',
     },
     {
         name: 'Sadia Khan',
         role: 'Tennis Player',
-        comment:
-            'Great platform! Clean UI, fast booking system, and trusted facilities everywhere.',
+        comment: 'Great platform! Clean UI, fast booking system, and trusted facilities everywhere.',
     },
     {
         name: 'Mehedi Hasan',
         role: 'Cricket Player',
-        comment:
-            'I love how simple it is to find and reserve cricket grounds. Highly recommended!',
+        comment: 'I love how simple it is to find and reserve cricket grounds. Highly recommended!',
     },
 ]
 
@@ -39,21 +36,10 @@ const Testimonials = () => {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-
                     {testimonials.map((item, idx) => (
                         <div
                             key={idx}
-                            className="
-                                relative
-                                bg-blue-50
-                                p-6
-                                rounded-2xl
-                                shadow-sm
-                                hover:shadow-xl
-                                hover:-translate-y-2
-                                transition-all duration-300
-                                border border-blue-100
-                            "
+                            className="relative bg-blue-50 p-6 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-blue-100"
                         >
                             {/* Quote Icon */}
                             <FaQuoteLeft className="text-blue-500 text-2xl mb-4" />
@@ -81,8 +67,8 @@ const Testimonials = () => {
                             </div>
                         </div>
                     ))}
-
                 </div>
+
             </div>
         </section>
     )

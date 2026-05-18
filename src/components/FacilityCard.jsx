@@ -4,7 +4,7 @@ import { Button } from '@heroui/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const FacultyCard = ({ faculty }) => {
+const FacilityCard = ({ faculty }) => {
     const {
         name,
         image_url,
@@ -16,31 +16,16 @@ const FacultyCard = ({ faculty }) => {
     } = faculty
 
     return (
-        <div
-            className="
-                group
-                bg-white
-                rounded-2xl
-                overflow-hidden
-                shadow-sm
-                hover:shadow-xl
-                transition-all duration-300
-                hover:-translate-y-2
-                border border-gray-100
-            "
-        >
+        <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+            
             {/* Image */}
-            <div className="relative">
+            <div className="relative overflow-hidden">
                 <Image
                     src={image_url}
                     alt={name}
                     height={400}
                     width={600}
-                    className="
-                        w-full h-52 object-cover
-                        group-hover:scale-110
-                        transition-transform duration-500
-                    "
+                    className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
 
                 {/* Rating */}
@@ -80,14 +65,7 @@ const FacultyCard = ({ faculty }) => {
                         {available_slots?.map((slot, idx) => (
                             <span
                                 key={idx}
-                                className="
-                                    px-3 py-1
-                                    text-xs
-                                    rounded-full
-                                    bg-blue-50
-                                    text-blue-600
-                                    border border-blue-100
-                                "
+                                className="px-3 py-1 text-xs rounded-full bg-blue-50 text-blue-600 border border-blue-100"
                             >
                                 {slot}
                             </span>
@@ -104,16 +82,7 @@ const FacultyCard = ({ faculty }) => {
                 <div className="mt-5">
                     <Link href={`/facility/${name}`}>
                         <Button
-                            className="
-                                w-full
-                                bg-gradient-to-r from-sky-500 to-blue-700
-                                text-white
-                                font-semibold
-                                rounded-xl
-                                h-11
-                                shadow-md
-                                hover:shadow-xl
-                                transition-all  "
+                            className="w-full bg-gradient-to-r from-sky-500 to-blue-700 text-white font-semibold rounded-xl h-11 shadow-md hover:shadow-xl transition-all"
                         >
                             Book Now
                         </Button>
@@ -125,4 +94,4 @@ const FacultyCard = ({ faculty }) => {
     )
 }
 
-export default FacultyCard
+export default FacilityCard

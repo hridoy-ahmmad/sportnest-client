@@ -36,27 +36,10 @@ const PopularSports = () => {
                     {sports.map((sport, idx) => (
                         <div
                             key={idx}
-                            className="
-                                group cursor-pointer
-                                bg-white
-                                border border-gray-100
-                                rounded-2xl
-                                p-6
-                                text-center
-                                shadow-sm
-                                hover:shadow-xl
-                                hover:-translate-y-2
-                                transition-all duration-300
-                            "
+                            className="group cursor-pointer bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300"
                         >
-                            <div
-                                className={`
-                                    text-4xl mb-3 flex justify-center
-                                    ${sport.color}
-                                    group-hover:scale-125
-                                    transition-transform duration-300
-                                `}
-                            >
+                            {/* Icon Wrapper */}
+                            <div className={`text-4xl mb-3 flex justify-center ${sport.color} group-hover:scale-125 transition-transform duration-300`}>
                                 {sport.icon}
                             </div>
 
@@ -65,8 +48,8 @@ const PopularSports = () => {
                             </h3>
                         </div>
                     ))}
-
                 </div>
+
             </div>
         </section>
     )

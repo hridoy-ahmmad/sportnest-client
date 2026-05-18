@@ -3,7 +3,7 @@
 import React from 'react'
 import { Button } from '@heroui/react'
 import Link from 'next/link'
-import { FaGoogle } from 'react-icons/fa'
+
 import { FcGoogle } from 'react-icons/fc'
 import { authClient } from '@/lib/auth-client'
 
@@ -18,9 +18,16 @@ const LoginPage = () => {
         //     rememberMe: true,
         // });
     }
+
+    const handleGoogleLogin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+        console.log(data?.user);
+    }
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-sky-50 via-white to-blue-100 px-4">
-
             <div className="w-full max-w-md bg-white shadow-xl rounded-2xl p-8 border border-blue-100">
 
                 {/* Title */}
@@ -64,15 +71,7 @@ const LoginPage = () => {
                     {/* Login Button */}
                     <Button
                         type='submit'
-                        className="
-                            w-full
-                            bg-gradient-to-r from-sky-500 to-blue-700
-                            text-white font-semibold
-                            h-12 rounded-xl
-                            shadow-md
-                            hover:shadow-xl
-                            transition-all
-                        "
+                        className="w-full bg-gradient-to-r from-sky-500 to-blue-700 text-white font-semibold h-12 rounded-xl shadow-md hover:shadow-xl transition-all"
                     >
                         Login
                     </Button>
@@ -87,18 +86,14 @@ const LoginPage = () => {
                 </div>
 
                 {/* Google Login */}
-                <button
-                    className="
-                        w-full flex items-center justify-center gap-2
-                        border border-gray-300
-                        py-3 rounded-xl
-                        hover:bg-gray-50
-                        transition
-                    "
+                <Button
+                    onClick={handleGoogleLogin}
+                    variant='outline'
+                    className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded-xl hover:bg-gray-50 transition"
                 >
                     <FcGoogle className="text-red-500" />
                     Continue with Google
-                </button>
+                </Button>
 
                 {/* Register link */}
                 <p className="text-center text-sm text-gray-500 mt-6">

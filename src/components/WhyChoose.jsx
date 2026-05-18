@@ -45,37 +45,29 @@ const WhyChoose = () => {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-
                     {features.map((item, idx) => (
                         <div
                             key={idx}
-                            className="
-                                group
-                                bg-white
-                                p-6
-                                rounded-2xl
-                                shadow-sm
-                                hover:shadow-xl
-                                hover:-translate-y-2
-                                transition-all duration-300
-                                border border-blue-100
-                            "
+                            className="group bg-white p-6 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 border border-blue-100"
                         >
+                            {/* Icon */}
                             <div className={`text-3xl mb-4 ${item.color}`}>
                                 {item.icon}
                             </div>
 
-                            <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600">
+                            {/* Title */}
+                            <h3 className="text-xl font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
                                 {item.title}
                             </h3>
 
+                            {/* Description */}
                             <p className="text-gray-600 text-sm leading-relaxed">
                                 {item.desc}
                             </p>
                         </div>
                     ))}
-
                 </div>
+
             </div>
         </section>
     )

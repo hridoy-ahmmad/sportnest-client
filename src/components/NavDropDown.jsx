@@ -4,12 +4,14 @@ import { authClient } from "@/lib/auth-client";
 import { Button, Dropdown, Label } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { BsCalendarCheckFill } from "react-icons/bs";
 import { CgNametag } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { FaPlusCircle } from "react-icons/fa";
 
 export function NavDropDown() {
+
     const { data: session, } = authClient.useSession()
     const user = session?.user
 
@@ -20,25 +22,24 @@ export function NavDropDown() {
     return (
 
         <Dropdown >
-            <div className="py-2 bg-blue-50 border border-gray-200 rounded-2xl">
+            <div className="bg-linear-to-br from-blue-50 to-white border border-gray-200 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300">
                 <Button
                     variant="light"
-                    className="rounded-xl  px-3 py-2 flex items-center gap-3"
+                    className="rounded-2xl px-4 py-6 flex items-center gap-3 w-full hover:bg-white/60 transition"
                 >
-                    <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <div className="w-9 h-9 rounded-full overflow-hidden ring-2 ring-blue-200 shadow-sm">
                         <Image
                             alt="user"
                             src={user?.image}
-                            width={32}
-                            height={32}
-                            className="w-10 h-10 object-cover"
+                            width={30}
+                            height={30}
+                            className="w-11 h-11 object-cover"
                         />
                     </div>
-                    <p className="font-medium flex items-center gap-2 text-gray-800 max-w-40 truncate text-lg uppercase">
-                        
-                        <span className="truncate">{user?.name}</span>
-                    </p>
 
+                    <p className="font-semibold flex items-center gap-2 text-gray-800 max-w-40 truncate text-base uppercase tracking-wide">
+                        <span className="truncate">{user?.name.split(' ')[0]}</span>
+                    </p>
                 </Button>
             </div>
             <Dropdown.Popover className={'rounded-xl p-5'}>
