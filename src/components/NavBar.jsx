@@ -17,6 +17,8 @@ const NavBar = () => {
         { name: 'Manage Facilities', path: '/manage-facilities' },
     ]
 
+
+
     return (
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-blue-100 shadow-sm">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -73,7 +75,9 @@ const NavBar = () => {
                         shadow-md
                     "
                         >
-                            Login
+                            <Link href={'/login'}>
+                                Login
+                            </Link>
                         </Button>
                     </div>
 
@@ -139,7 +143,10 @@ const NavBar = () => {
                         font-semibold
                     "
                         >
-                            Login
+                            <Link href={'/login'}>
+                                Login
+                            </Link>
+
                         </Button>
                     </div>
 

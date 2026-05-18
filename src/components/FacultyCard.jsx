@@ -4,7 +4,7 @@ import { Button } from '@heroui/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const FacilityCard = ({ faculty }) => {
+const FacultyCard = ({ faculty }) => {
     const {
         name,
         image_url,
@@ -113,10 +113,9 @@ const FacilityCard = ({ faculty }) => {
                                 h-11
                                 shadow-md
                                 hover:shadow-xl
-                                transition-all
-                            "
+                                transition-all  "
                         >
-                            View Details
+                            Book Now
                         </Button>
                     </Link>
                 </div>
@@ -126,4 +125,4 @@ const FacilityCard = ({ faculty }) => {
     )
 }
 
-export default FacilityCard
+export default FacultyCard

@@ -57,7 +57,7 @@ const FeaturedFaculties = async () => {
             "
         >
             <Link
-                href="/faculties"
+                href="all-facilities"
                 className="flex items-center gap-2"
             >
                 View All Facilities
