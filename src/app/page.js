@@ -1,4 +1,5 @@
 import Banner from "@/components/Banner";
+import FeaturedFaculties from "@/components/FeaturedFaculties";
 import PopularSports from "@/components/PopularSports";
 import Testimonials from "@/components/Testimonials";
 import WhyChoose from "@/components/WhyChoose";
@@ -8,10 +9,11 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <PopularSports/>
+      <PopularSports />
       {/* featured facilities */}
-      <WhyChoose/>
-      <Testimonials/>
+      <FeaturedFaculties />
+      <WhyChoose />
+      <Testimonials />
     </div>
   );
 }
