@@ -21,11 +21,11 @@ const RegisterPage = () => {
             image: userInfo.photo,
             rememberMe: true,
         });
-
         if (data?.user) {
             router.push('/')
+        } else {
+            alert(error?.message || 'Registration failed')
         }
-
 
     }
     return (

@@ -1,13 +1,17 @@
 'use client'
 
+import { authClient } from '@/lib/auth-client'
 import { Button } from '@heroui/react'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import { BiFootball } from 'react-icons/bi'
+
 import { FiMenu, FiX } from 'react-icons/fi'
-import { GiSoccerBall } from 'react-icons/gi'
+
 
 const NavBar = () => {
+    const { data: session, } = authClient.useSession()
+    console.log(session);
+
     const [isOpen, setIsOpen] = useState(false)
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -17,7 +21,10 @@ const NavBar = () => {
         { name: 'Manage Facilities', path: '/manage-facilities' },
     ]
 
-
+    const handleLogout = async () => {
+        await authClient.signOut()
+        alert('Logged out successfully')
+    }
 
     return (
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-blue-100 shadow-sm">
@@ -64,9 +71,16 @@ const NavBar = () => {
                     </nav>
 
                     {/* Desktop Button */}
-                    <div className="hidden lg:flex items-center">
-                        <Button
-                            className="
+                    <div className="hidden lg:flex gap-2 items-center">
+
+                        {
+                            session?.user ? <Button
+                                onClick={handleLogout}
+                                variant='danger'
+                                className={'rounded-xl'}>
+                                Log Out
+                            </Button> : <Button
+                                className="
                         bg-gradient-to-r from-sky-500 to-blue-700
                         text-white
                         rounded-xl
@@ -74,11 +88,15 @@ const NavBar = () => {
                         font-semibold
                         shadow-md
                     "
-                        >
-                            <Link href={'/login'}>
-                                Login
-                            </Link>
-                        </Button>
+                            >
+                                <Link href={'/login'}>
+                                    Login
+                                </Link>
+                            </Button>
+                        }
+
+
+
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -133,7 +151,7 @@ const NavBar = () => {
                         ))}
                     </nav>
 
-                    <div className="mt-4">
+                    <div className="mt-4 flex items-center">
                         <Button
                             className="
                         w-full
@@ -147,6 +165,13 @@ const NavBar = () => {
                                 Login
                             </Link>
 
+                        </Button>
+                        <Button
+                            onClick={handleLogout}
+                            variant='danger'
+                            className={'rounded-xl'}
+                        >
+                            Log Out
                         </Button>
                     </div>
 

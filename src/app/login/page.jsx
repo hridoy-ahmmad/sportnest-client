@@ -12,13 +12,11 @@ const LoginPage = () => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const userInfo = Object.fromEntries(formData.entries())
-        console.log(userInfo);
-        
-        const { data, error } = await authClient.signIn.email({
-            email: userInfo.email,
-            password: userInfo.password, 
-            rememberMe: true, 
-        });
+        // const { data, error } = await authClient.signIn.email({
+        //     email: userInfo.email,
+        //     password: userInfo.password,
+        //     rememberMe: true,
+        // });
     }
     return (
         <div className="min-h-screen flex items-center justify-center bg-linear-to-br from-sky-50 via-white to-blue-100 px-4">
@@ -65,6 +63,7 @@ const LoginPage = () => {
 
                     {/* Login Button */}
                     <Button
+                        type='submit'
                         className="
                             w-full
                             bg-gradient-to-r from-sky-500 to-blue-700
