@@ -3,9 +3,31 @@
 import React from 'react'
 import { Input, Button, Form, TextField, Label, FieldError, Description } from '@heroui/react'
 import Link from 'next/link'
-import { Check } from '@gravity-ui/icons'
+import { authClient } from '@/lib/auth-client'
+import { useRouter } from 'next/navigation'
 
 const RegisterPage = () => {
+    const router = useRouter()
+    const handleRegister = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const userInfo = Object.fromEntries(formData.entries())
+        // console.log(userInfo);
+
+        const { data, error } = await authClient.signUp.email({
+            email: userInfo.email,
+            password: userInfo.password,
+            name: userInfo.name,
+            image: userInfo.photo,
+            rememberMe: true,
+        });
+
+        if (data?.user) {
+            router.push('/')
+        }
+
+
+    }
     return (
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-sky-50 via-white to-blue-100 px-4">
 
@@ -23,12 +45,13 @@ const RegisterPage = () => {
                 </div>
 
                 {/* Form */}
-                <Form className="flex w-96 flex-col gap-8">
+                <Form onSubmit={handleRegister} className="flex w-96 flex-col gap-8">
 
                     {/* Name */}
                     <TextField
                         isRequired
                         name="name"
+                        type='text'
                     >
                         <Label>Name</Label>
                         <Input placeholder="Enter your name" />
@@ -56,6 +79,7 @@ const RegisterPage = () => {
                     <TextField
                         isRequired
                         name="photo"
+                        type='url'
                     >
                         <Label>Photo URL</Label>
                         <Input placeholder="Paste your photo URL" />
