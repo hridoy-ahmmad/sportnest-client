@@ -6,6 +6,7 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 
 import { FiMenu, FiX } from 'react-icons/fi'
+import { NavDropDown } from './NavDropDown'
 
 
 const NavBar = () => {
@@ -74,13 +75,22 @@ const NavBar = () => {
                     <div className="hidden lg:flex gap-2 items-center">
 
                         {
-                            session?.user ? <Button
-                                onClick={handleLogout}
-                                variant='danger'
-                                className={'rounded-xl'}>
-                                Log Out
-                            </Button> : <Button
-                                className="
+                            session?.user ?
+
+                                <div>
+                                    <NavDropDown />
+                                </div>
+                                // <Button
+                                //     onClick={handleLogout}
+                                //     variant='danger'
+                                //     className={'rounded-xl'}>
+                                //     Log Out
+                                // </Button> 
+
+                                :
+
+                                <Button
+                                    className="
                         bg-gradient-to-r from-sky-500 to-blue-700
                         text-white
                         rounded-xl
@@ -88,11 +98,11 @@ const NavBar = () => {
                         font-semibold
                         shadow-md
                     "
-                            >
-                                <Link href={'/login'}>
-                                    Login
-                                </Link>
-                            </Button>
+                                >
+                                    <Link href={'/login'}>
+                                        Login
+                                    </Link>
+                                </Button>
                         }
 
 
