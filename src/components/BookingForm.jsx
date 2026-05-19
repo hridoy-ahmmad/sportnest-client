@@ -1,12 +1,41 @@
 "use client"
+import { authClient } from '@/lib/auth-client';
 import { Button, FieldError, Form, Input, Label, TextField, Select, ListBox } from '@heroui/react';
 import React, { useState } from 'react';
 import { FaClock, FaRegCalendarAlt, FaStopwatch } from 'react-icons/fa';
 
 const BookingForm = ({ data }) => {
     const [duration, setDuration] = useState(1)
-    console.log(duration);
-    
+    const { data: session } = authClient.useSession()
+
+
+    const handleBooking = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const bookingInfo = Object.fromEntries(formData.entries())
+        const bookingData = {
+            ...bookingInfo,
+            facility_id: data._id,
+            user_id: session?.user?.id,
+            user_email: session?.user?.email,
+            user_name: session?.user?.name,
+            total_price: data.price_per_hour * duration,
+            image: data.image_url
+        }
+        const res = await fetch('http://localhost:5000/bookings', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookingData)
+        })
+        const result = await res.json()
+        console.log(result);
+        
+
+    }
+
+
     return (
         <div className="min-h-screen w-full  flex items-center justify-center px-4">
             <div className="w-full bg-white shadow-xl rounded-2xl p-8 border border-blue-100">
@@ -23,7 +52,7 @@ const BookingForm = ({ data }) => {
                     </div>
                 </div>
                 {/* Form */}
-                <Form className="mt-8 space-y-5 flex flex-col gap-5">
+                <Form onSubmit={handleBooking} className="mt-8 space-y-5 flex flex-col gap-5">
                     {/* Name */}
                     <TextField
                         isRequired
@@ -79,7 +108,7 @@ const BookingForm = ({ data }) => {
                         name="duration"
                         type='number'
                         value={duration}
-                        onChange={(value)=>setDuration(Number(value))}
+                        onChange={(value) => setDuration(Number(value))}
                     >
                         <Label className='flex items-center gap-2'><FaStopwatch /> Duration(Hours)</Label>
                         <Input />
@@ -107,7 +136,7 @@ const BookingForm = ({ data }) => {
                         type='submit'
                         className="w-full bg-gradient-to-r from-sky-500 to-blue-700 text-white font-semibold h-12 rounded-xl shadow-md hover:shadow-xl transition-all"
                     >
-                        Conrim Booking
+                        Confirm Booking
                     </Button>
 
                 </Form>

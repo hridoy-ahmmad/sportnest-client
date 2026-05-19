@@ -7,8 +7,7 @@ const BookNow = async ({ params }) => {
     const { id } = await params
     const res = await fetch(`http://localhost:5000/facilities/${id}`, { cache: 'no-store' }) 
     const data = await res.json()
-    console.log(data);
-    
+
     return (
         <div className='container mx-auto'>
             <Link href={'/'}>Back to facilities</Link>
