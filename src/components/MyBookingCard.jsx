@@ -7,6 +7,7 @@ import { FaLocationDot } from "react-icons/fa6";
 import { HiOutlineClock, HiOutlineTag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineCalendarDays, HiOutlineXMark } from "react-icons/hi2";
 import { MdOutlineEmail, MdOutlinePriceChange } from "react-icons/md";
+import { CancelBooking } from "./CancelBooking";
 
 export default function BookingCard({ booking }) {
     const {
@@ -88,14 +89,7 @@ export default function BookingCard({ booking }) {
 
             {/* Right Content: Desktop Cancel Button */}
             <div className="hidden md:block shrink-0">
-                <Button
-                   
-                    variant="danger"
-                    className="rounded-xl font-semibold px-4 py-2 flex items-center gap-1.5 text-xs tracking-wide"
-                >
-                    <HiOutlineXMark size={16} />
-                    Cancel Booking
-                </Button>
+              <CancelBooking id={_id}/>
             </div>
         </div>
 
@@ -111,14 +105,9 @@ export default function BookingCard({ booking }) {
 
             {/* Mobile/Tablet Cancel Button */}
             <div className="block md:hidden w-full">
-                <Button
-                    color="danger"
-                    variant="flat"
-                    className="w-full rounded-xl font-semibold py-2.5 flex items-center justify-center gap-1.5 text-xs"
-                >
-                    <HiOutlineXMark size={16} />
-                    Cancel Booking
-                </Button>
+               {/* ---------- */}
+               <CancelBooking id={_id}/>
+               
             </div>
         </div>
     </div>
