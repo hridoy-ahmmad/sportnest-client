@@ -16,12 +16,9 @@ const FacilityDetails = ({ data }) => {
         name,
         image_url,
         location,
-        rating,
         price_per_hour,
         capacity,
         available_slots,
-        booking_count,
-        category,
         description,
         facility_type,
         owner_email
@@ -48,12 +45,6 @@ const FacilityDetails = ({ data }) => {
                             <MdOutlineSportsTennis className="text-blue-600" />
                             {facility_type}
                         </div>
-
-                        {/* Rating */}
-                        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-4 py-2 rounded-full flex items-center gap-2 text-sm font-semibold shadow-xs">
-                            <FaStar className="text-yellow-400" />
-                            {rating}
-                        </div>
                     </div>
 
                     {/* Content Section */}
@@ -68,7 +59,6 @@ const FacilityDetails = ({ data }) => {
                             <FaMapMarkerAlt className="text-blue-600" />
                             {location}
                         </div>
-
                         {/* Description */}
                         <p className="mt-6 text-gray-600 leading-relaxed">
                             {description}
@@ -83,12 +73,6 @@ const FacilityDetails = ({ data }) => {
                                 </h3>
                             </div>
 
-                            <div className="border border-gray-200 rounded-2xl p-4 bg-gray-50/50">
-                                <p className="text-sm text-gray-500 font-medium">Total Bookings</p>
-                                <h3 className="text-2xl font-black text-blue-700 mt-1">
-                                    {booking_count}
-                                </h3>
-                            </div>
                         </div>
 
                         {/* Capacity */}
@@ -123,11 +107,6 @@ const FacilityDetails = ({ data }) => {
 
                         {/* Extra Info */}
                         <div className="mt-8 space-y-3 p-4 border border-gray-200 rounded-2xl bg-gray-50    ">
-                            <div className="flex items-center justify-between border-b border-gray-100 pb-3">
-                                <span className="text-gray-500">Category</span>
-                                <span className="font-semibold capitalize text-gray-800">{category}</span>
-                            </div>
-
                             <div className="flex items-center justify-between border-b border-gray-100 pb-3">
                                 <span className="text-gray-500">Owner Email</span>
                                 <span className="font-semibold text-gray-800">{owner_email}</span>

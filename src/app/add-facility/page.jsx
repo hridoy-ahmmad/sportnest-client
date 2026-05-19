@@ -1,27 +1,54 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Plus } from "@gravity-ui/icons";
-import {
-    Button,
-    FieldError,
-    Form,
-    Input,
-    Label,
-    ListBox,
-    Select,
-    TextField,
-} from "@heroui/react";
+import { Button, FieldError, Form, Input, Label, ListBox, Select, TextField } from "@heroui/react";
+import { useState } from "react";
 
 import MultipleValueTextInput from "react-multivalue-text-input";
-
 const AddFacility = () => {
+    const { data: session } = authClient.useSession()
+    const user = session?.user
+    const [slots, setSlots] = useState([])
+    console.log(slots);
+    
+
+    const handleAddFacility = async (e) => {
+        e.preventDefault()
+        const formData = new FormData(e.currentTarget)
+        const data = Object.fromEntries(formData.entries())
+        const facilityData = {
+            name: data?.name,
+            capacity: Number(data?.capacity),
+            facility_type: data?.category,
+            owner_email: user?.email,
+            image_url: data?.image,
+            available_slots: slots,
+            price_per_hour: Number(data?.price),
+            location: data?.location,
+            description: data?.description,
+            user_id: user?.id
+        }
+        console.log(data.slots.toString());
+
+        const res = await fetch('http://localhost:5000/facilities', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(facilityData)
+        })
+        const result = await res.json()
+        console.log(result);
+    }
+
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-sky-50 py-14 px-4">
+        <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-sky-50 py-14 px-4">
             <div className="max-w-5xl mx-auto bg-white/90 backdrop-blur-xl border border-white shadow-[0_10px_60px_rgba(0,0,0,0.08)] rounded-[32px] p-8 md:p-12">
 
                 {/* Header */}
                 <div className="mb-10">
-                    <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-sky-500 to-blue-700 bg-clip-text text-transparent">
+                    <h1 className="text-3xl md:text-4xl font-black bg-linear-to-r from-sky-500 to-blue-700 bg-clip-text text-transparent">
                         Add New Facility
                     </h1>
 
@@ -30,7 +57,7 @@ const AddFacility = () => {
                     </p>
                 </div>
 
-                <Form>
+                <Form onSubmit={handleAddFacility}>
                     <div className="grid md:grid-cols-2 gap-6">
 
                         {/* LEFT SIDE */}
@@ -163,14 +190,14 @@ const AddFacility = () => {
 
                             <MultipleValueTextInput
                                 className="w-full outline-none border-none bg-transparent py-2 text-gray-700"
-                                onItemAdded={(item, allItems) =>
-                                    console.log(`Item added: ${item}`)
-                                }
+                                onItemAdded={(item, allItems) => setSlots(allItems)}
+
                                 onItemDeleted={(item, allItems) =>
-                                    console.log(`Item removed: ${item}`)
+                                    setSlots(allItems)
                                 }
+                                shouldAddOnBlur={true}
                                 label=""
-                                name="slots"
+                                name='slots'
                                 placeholder="e.g. 08:00am - 09:00am"
                             />
                         </div>
@@ -191,7 +218,8 @@ const AddFacility = () => {
 
                     {/* Submit Button */}
                     <Button
-                        className="mt-10 h-14 px-10 rounded-2xl bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-700 text-white font-bold text-base shadow-[0_10px_30px_rgba(37,99,235,0.35)] hover:scale-[1.02] transition-all duration-300"
+                        type="submit"
+                        className="mt-10 h-14 px-10 rounded-2xl bg-linear-to-r from-sky-500 via-blue-600 to-indigo-700 text-white font-bold text-base shadow-[0_10px_30px_rgba(37,99,235,0.35)] hover:scale-[1.02] transition-all duration-300"
                     >
                         <Plus size={18} />
                         Add Facility

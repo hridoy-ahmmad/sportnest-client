@@ -30,7 +30,7 @@ const FeaturedFaculties = async () => {
                     featuredFacilities.map(faculty => (
                         <FacilityCard
                             key={faculty._id}
-                            faculty={faculty}
+                            facility={faculty}
                         />
                     ))
                 }

@@ -4,7 +4,7 @@ import { Button } from '@heroui/react'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const FacilityCard = ({ faculty }) => {
+const FacilityCard = ({ facility }) => {
     const {
         _id,
         name,
@@ -14,7 +14,7 @@ const FacilityCard = ({ faculty }) => {
         rating,
         capacity,
         available_slots
-    } = faculty
+    } = facility
 
     return (
         <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
@@ -27,14 +27,7 @@ const FacilityCard = ({ faculty }) => {
                     width={600}
                     className="w-full h-52 object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-
-                {/* Rating */}
-                <div className="absolute top-3 right-3 bg-white/90 px-3 py-1 rounded-full flex items-center gap-1 text-sm font-semibold">
-                    <FaStar className="text-yellow-400" />
-                    {rating}
-                </div>
             </div>
-
             {/* Content */}
             <div className="p-5">
 
