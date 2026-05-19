@@ -6,7 +6,7 @@ import FacilityCard from './FacilityCard';
 
 const FeaturedFaculties = async () => {
 
-    const res = await fetch('http://localhost:5000/facilities', { cache: 'no-store' }) // Next.js SSR এর জন্য ভালো প্র্যাকটিস
+    const res = await fetch('http://localhost:5000/facilities', { cache: 'no-store' }) 
     const data = await res.json()
     const featuredFacilities = data.slice(0, 6)
 

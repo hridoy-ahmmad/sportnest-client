@@ -4,13 +4,14 @@ import { authClient } from "@/lib/auth-client";
 import { Button, Dropdown, Label } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BsCalendarCheckFill } from "react-icons/bs";
-import { CgNametag } from "react-icons/cg";
 import { CiSettings } from "react-icons/ci";
 import { FaPlusCircle } from "react-icons/fa";
 
+
 export function NavDropDown() {
+    const router = useRouter()
 
     const { data: session, } = authClient.useSession()
     const user = session?.user
@@ -18,6 +19,7 @@ export function NavDropDown() {
     const handleLogout = async () => {
         await authClient.signOut()
         alert('Logged out successfully')
+        router.push('/login')
     }
     return (
 
@@ -63,7 +65,7 @@ export function NavDropDown() {
                             className={'rounded-xl w-full'}>
                             Log Out
                         </Button>
-
+                       
                     </Dropdown.Item>
                 </Dropdown.Menu>
             </Dropdown.Popover>

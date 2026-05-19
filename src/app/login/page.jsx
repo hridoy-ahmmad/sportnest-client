@@ -6,17 +6,26 @@ import Link from 'next/link'
 
 import { FcGoogle } from 'react-icons/fc'
 import { authClient } from '@/lib/auth-client'
+import { useRouter } from 'next/navigation'
 
 const LoginPage = () => {
+    const router = useRouter()
     const handleLogin = async (e) => {
         e.preventDefault()
         const formData = new FormData(e.currentTarget)
         const userInfo = Object.fromEntries(formData.entries())
-        // const { data, error } = await authClient.signIn.email({
-        //     email: userInfo.email,
-        //     password: userInfo.password,
-        //     rememberMe: true,
-        // });
+        const { data, error } = await authClient.signIn.email({
+            email: userInfo.email,
+            password: userInfo.password,
+            rememberMe: true,
+        });
+        if (data?.user) {
+            router.push('/')
+        }
+
+
+        console.log(data, error);
+        
     }
 
     const handleGoogleLogin = async () => {

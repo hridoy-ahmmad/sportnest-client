@@ -6,6 +6,7 @@ import Image from 'next/image'
 
 const FacilityCard = ({ faculty }) => {
     const {
+        _id,
         name,
         image_url,
         location,
@@ -17,7 +18,6 @@ const FacilityCard = ({ faculty }) => {
 
     return (
         <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
-            
             {/* Image */}
             <div className="relative overflow-hidden">
                 <Image
@@ -80,8 +80,9 @@ const FacilityCard = ({ faculty }) => {
 
                 {/* Button */}
                 <div className="mt-5">
-                    <Link href={`/facility/${name}`}>
+                    <Link href={`/all-facilities/${_id}`}>
                         <Button
+
                             className="w-full bg-gradient-to-r from-sky-500 to-blue-700 text-white font-semibold rounded-xl h-11 shadow-md hover:shadow-xl transition-all"
                         >
                             Book Now
