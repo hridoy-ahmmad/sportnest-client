@@ -13,8 +13,12 @@ const BookNow = async ({ params }) => {
         <div className='container mx-auto'>
             <Link href={'/'}>Back to facilities</Link>
             <div className='flex gap-4'>
-                <FacilityDetails data={data} />
-                <BookingForm/>
+                <div className='flex-1'>
+                    <FacilityDetails data={data}  />
+                </div>
+                <div className='flex-1 justify-center items-center'>
+                    <BookingForm data={data}/>
+                </div>
             </div>
         </div>
     );
