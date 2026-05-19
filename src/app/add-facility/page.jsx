@@ -11,7 +11,7 @@ const AddFacility = () => {
     const user = session?.user
     const [slots, setSlots] = useState([])
     console.log(slots);
-    
+
 
     const handleAddFacility = async (e) => {
         e.preventDefault()
@@ -27,7 +27,8 @@ const AddFacility = () => {
             price_per_hour: Number(data?.price),
             location: data?.location,
             description: data?.description,
-            user_id: user?.id
+            user_id: user?.id,
+            date: new Date()
         }
         console.log(data.slots.toString());
 

@@ -4,8 +4,8 @@
 import { Button, Card } from "@heroui/react";
 import Image from "next/image";
 import { FaLocationDot } from "react-icons/fa6";
-import { HiOutlineClock, HiOutlineTag, HiOutlineUser } from "react-icons/hi";
-import { HiOutlineCalendarDays, HiOutlineXMark } from "react-icons/hi2";
+import { HiOutlineClock,  } from "react-icons/hi";
+import { HiOutlineCalendarDays  } from "react-icons/hi2";
 import { MdOutlineEmail, MdOutlinePriceChange } from "react-icons/md";
 import { CancelBooking } from "./CancelBooking";
 
