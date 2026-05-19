@@ -1,13 +1,15 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
 import { Button, FieldError, Form, Input, Label, TextField, Select, ListBox } from '@heroui/react';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { FaClock, FaRegCalendarAlt, FaStopwatch } from 'react-icons/fa';
+import { Bounce, toast } from 'react-toastify';
 
 const BookingForm = ({ data }) => {
     const [duration, setDuration] = useState(1)
     const { data: session } = authClient.useSession()
-
+    const router = useRouter()
 
     const handleBooking = async (e) => {
         e.preventDefault()
@@ -20,7 +22,8 @@ const BookingForm = ({ data }) => {
             user_email: session?.user?.email,
             user_name: session?.user?.name,
             total_price: data.price_per_hour * duration,
-            image: data.image_url
+            image: data.image_url,
+            location: data.location
         }
         const res = await fetch('http://localhost:5000/bookings', {
             method: 'POST',
@@ -30,8 +33,34 @@ const BookingForm = ({ data }) => {
             body: JSON.stringify(bookingData)
         })
         const result = await res.json()
-        console.log(result);
+
+        if (res.ok) {
+            toast.success('Booking Successful', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
         
+            });
+            router.push('/my-bookings')
+        } else {
+            toast.error('Booking failed', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+            });
+        }
+
 
     }
 

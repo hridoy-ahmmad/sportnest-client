@@ -15,7 +15,7 @@ export default function Home() {
       <FeaturedFaculties />
       <WhyChoose />
       <Testimonials />
-      <Footer />
+      
     </div>
   );
 }

@@ -5,6 +5,8 @@ import { Input, Button, Form, TextField, Label, FieldError, Description } from '
 import Link from 'next/link'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
+import { FcGoogle } from 'react-icons/fc'
 
 const RegisterPage = () => {
     const router = useRouter()
@@ -21,11 +23,68 @@ const RegisterPage = () => {
             image: userInfo.photo,
             rememberMe: true,
         });
+
         if (data?.user) {
+            toast.success('Register successful', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             router.push('/')
-        } else {
-            alert(error?.message || 'Registration failed')
         }
+        else if (error) {
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+        }
+
+
+    }
+    const handleGoogleLogin = async () => {
+        const data = await authClient.signIn.social({
+            provider: "google",
+        });
+
+        if (data) {
+            toast.success('Login successful', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+
+            })
+            router.push('/')
+        }else{
+            toast.error('Google login failed', {
+                position: "top-center",
+                autoClose: 2000,        
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+
+                progress: undefined,
+                theme: "light",
+            })
+        }
+
+
 
     }
     return (
@@ -119,8 +178,24 @@ const RegisterPage = () => {
                             Submit
                         </Button>
                     </div>
-
                 </Form>
+
+                {/* Divider */}
+                <div className="flex items-center my-6">
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                    <p className="px-3 text-sm text-gray-400">OR</p>
+                    <div className="flex-1 h-px bg-gray-200"></div>
+                </div>
+
+                {/* Google Login */}
+                <Button
+                    onClick={handleGoogleLogin}
+                    variant='outline'
+                    className="w-full flex items-center justify-center gap-2 border border-gray-300 py-3 rounded-xl hover:bg-gray-50 transition"
+                >
+                    <FcGoogle className="text-red-500" />
+                    Continue with Google
+                </Button>
 
                 {/* Login link */}
                 <p className="text-center text-sm text-gray-500 mt-6">

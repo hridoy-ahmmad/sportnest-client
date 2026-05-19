@@ -7,6 +7,7 @@ import Link from 'next/link'
 import { FcGoogle } from 'react-icons/fc'
 import { authClient } from '@/lib/auth-client'
 import { useRouter } from 'next/navigation'
+import { toast } from 'react-toastify'
 
 const LoginPage = () => {
     const router = useRouter()
@@ -20,19 +21,54 @@ const LoginPage = () => {
             rememberMe: true,
         });
         if (data?.user) {
+            toast.success('Log In successful', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
             router.push('/')
+        } else if (error) {
+            toast.error(error.message, {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
+
+
+            console.log(data, error);
+
         }
 
-
-        console.log(data, error);
-        
     }
 
-    const handleGoogleLogin = async () => {
-        const data = await authClient.signIn.social({
-            provider: "google",
-        });
-        console.log(data?.user);
+        const handleGoogleLogin = async () => {
+            const data = await authClient.signIn.social({
+                provider: "google",
+            });
+            router.push('/')
+            toast.success('Login successful', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+
+         }) 
+        
+
     }
 
     return (

@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { BsCalendarCheckFill } from "react-icons/bs";
 import { CiSettings } from "react-icons/ci";
 import { FaPlusCircle } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 
 export function NavDropDown() {
@@ -18,7 +19,16 @@ export function NavDropDown() {
 
     const handleLogout = async () => {
         await authClient.signOut()
-        alert('Logged out successfully')
+        toast.success('Logout successful',{
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        })
         router.push('/login')
     }
     return (

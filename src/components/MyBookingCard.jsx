@@ -3,7 +3,7 @@
 
 import { Button, Card } from "@heroui/react";
 import Image from "next/image";
-import { BiCalendar, BiTag, BiUser, BiTimeFive } from "react-icons/bi";
+import { FaLocationDot } from "react-icons/fa6";
 import { HiOutlineClock, HiOutlineTag, HiOutlineUser } from "react-icons/hi";
 import { HiOutlineCalendarDays, HiOutlineXMark } from "react-icons/hi2";
 import { MdOutlineEmail, MdOutlinePriceChange } from "react-icons/md";
@@ -15,7 +15,9 @@ export default function BookingCard({ booking }) {
         date,
         duration,
         total_price,
-        _id
+        _id,
+        location,
+        slot
     } = booking;
 
     return (
@@ -54,10 +56,20 @@ export default function BookingCard({ booking }) {
 
                 {/* Meta Row (Badges/Tags) */}
                 <div className="flex flex-wrap gap-2 pt-1">
+                    {/* location */}
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200/60 text-gray-600 text-xs font-medium">
+                        <FaLocationDot size={14} className="text-gray-400" />
+                        <span>Location: <strong className="text-gray-700">{location}</strong></span>
+                    </div>
                     {/* Date */}
                     <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200/60 text-gray-600 text-xs font-medium">
                         <HiOutlineCalendarDays size={14} className="text-gray-400" />
                         <span>Date: <strong className="text-gray-700">{date}</strong></span>
+                    </div>
+                    {/* Time */}
+                    <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-50 border border-gray-200/60 text-gray-600 text-xs font-medium">
+                        <HiOutlineClock size={14} className="text-gray-400" />
+                        <span> <strong className="text-gray-700">{slot}</strong></span>
                     </div>
 
                     {/* Duration */}
