@@ -25,7 +25,7 @@ const BookingForm = ({ data }) => {
             image: data.image_url,
             location: data.location
         }
-        const res = await fetch('http://localhost:5000/bookings', {
+        const res = await fetch(`http://localhost:5000/bookings`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
