@@ -33,7 +33,7 @@ const AddFacility = () => {
             user_id: user?.id,
             date: new Date()
         }
-        console.log(data.slots.toString());
+        // console.log(data.slots.toString());
 
         const res = await fetch('http://localhost:5000/facilities', {
             method: 'POST',

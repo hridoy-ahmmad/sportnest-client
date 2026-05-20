@@ -3,12 +3,12 @@ import { Button, Card } from '@heroui/react';
 import Image from 'next/image';
 import React from 'react';
 import { FaLocationDot, FaPeopleRoof } from 'react-icons/fa6';
-import { HiOutlineCalendarDays, HiOutlineClock } from 'react-icons/hi2';
 import { MdOutlineEmail, MdOutlinePriceChange } from 'react-icons/md';
-import { BiEditAlt } from 'react-icons/bi';
-import { FaTrashAlt } from 'react-icons/fa';
+
 import { useRouter } from 'next/navigation';
 import { DeleteFacilityModal } from './DeleteFacilityModal';
+
+import { ModalForm } from './EditComponents/ModalForm';
 
 const ManageCard = ({ item }) => {
     const router = useRouter()
@@ -95,9 +95,9 @@ const ManageCard = ({ item }) => {
                     {/* Right Content: Desktop Cancel Button */}
                     <div className="hidden md:block shrink-0 ">
                         <div className='flex flex-col gap-2 items-end'>
-                            <Button>
-                                <BiEditAlt /> Edit Facility
-                            </Button>
+                            {/* edit btn */}
+                            <ModalForm item={item} />
+
                             <DeleteFacilityModal handleDelete={handleDelete} />
 
                         </div>

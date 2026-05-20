@@ -18,7 +18,8 @@ export default function BookingCard({ booking }) {
         total_price,
         _id,
         location,
-        slot
+        slot,
+        status
     } = booking;
 
     return (
@@ -50,8 +51,9 @@ export default function BookingCard({ booking }) {
                             Facility:
                         </span>
                         <h2 className="text-lg font-bold text-gray-800 leading-snug">
-                            {name}
+                            {name} 
                         </h2>
+                        <h3 className="px-3 py-1 bg-red-100 rounded-2xl text-gray-700">{status}</h3>
                     </div>
                 </div>
 
@@ -85,6 +87,7 @@ export default function BookingCard({ booking }) {
                         <span>${total_price}</span>
                     </div>
                 </div>
+              
             </div>
 
             {/* Right Content: Desktop Cancel Button */}

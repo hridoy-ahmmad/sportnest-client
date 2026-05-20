@@ -23,7 +23,8 @@ const BookingForm = ({ data }) => {
             user_name: session?.user?.name,
             total_price: data.price_per_hour * duration,
             image: data.image_url,
-            location: data.location
+            location: data.location,
+            status: 'pending'
         }
         const res = await fetch(`http://localhost:5000/bookings`, {
             method: 'POST',

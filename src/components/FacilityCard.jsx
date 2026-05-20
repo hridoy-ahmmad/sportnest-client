@@ -11,13 +11,12 @@ const FacilityCard = ({ facility }) => {
         image_url,
         location,
         price_per_hour,
-        rating,
         capacity,
         available_slots
     } = facility
 
     return (
-        <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
+        <div className=" bg-white flex flex-col pb-2 justify-between rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border border-gray-100">
             {/* Image */}
             <div className="relative overflow-hidden">
                 <Image
@@ -29,7 +28,7 @@ const FacilityCard = ({ facility }) => {
                 />
             </div>
             {/* Content */}
-            <div className="p-5">
+            <div className="p-5 ">
 
                 {/* Name */}
                 <h3 className="text-lg font-bold text-gray-900 group-hover:text-blue-600 transition">
@@ -71,8 +70,9 @@ const FacilityCard = ({ facility }) => {
                     $ {price_per_hour} / hour
                 </p>
 
+            </div>
                 {/* Button */}
-                <div className="mt-5">
+                <div className="mx-2">
                     <Link href={`/all-facilities/${_id}`}>
                         <Button
 
@@ -82,8 +82,6 @@ const FacilityCard = ({ facility }) => {
                         </Button>
                     </Link>
                 </div>
-
-            </div>
         </div>
     )
 }
