@@ -1,4 +1,5 @@
 import ManageCard from "@/components/ManageCard";
+import NoFaclityAdded from "@/components/NoFaclityAdded";
 import { auth } from "@/lib/auth";
 import { Plus, PlusShape } from "@gravity-ui/icons";
 import { Button } from "@heroui/react";
@@ -12,11 +13,9 @@ const ManageFacility = async () => {
         headers: await headers()
     })
     const user = session?.user
-
     const res = await fetch(`http://localhost:5000/facilities/user/${user.id}`)
     const data = await res.json()
     console.log(data);
-
 
     return (
         <div className="container mx-auto my-10">
@@ -37,7 +36,7 @@ const ManageFacility = async () => {
 
             <div>
                 {
-                    data.map(item=><ManageCard key={item._id} item={item}/> )
+                    data.length === 0 ? <NoFaclityAdded /> : data.map(item => <ManageCard key={item._id} item={item} />)
                 }
             </div>
 

@@ -3,14 +3,17 @@
 import { authClient } from "@/lib/auth-client";
 import { Plus } from "@gravity-ui/icons";
 import { Button, FieldError, Form, Input, Label, ListBox, Select, TextField } from "@heroui/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import MultipleValueTextInput from "react-multivalue-text-input";
+import { toast } from "react-toastify";
 const AddFacility = () => {
     const { data: session } = authClient.useSession()
     const user = session?.user
     const [slots, setSlots] = useState([])
-    console.log(slots);
+    // console.log(slots);
+    const router = useRouter()
 
 
     const handleAddFacility = async (e) => {
@@ -40,8 +43,31 @@ const AddFacility = () => {
             body: JSON.stringify(facilityData)
         })
         const result = await res.json()
-        console.log(result);
-    }
+
+        if (result.insertedId) {
+            router.push('/manage-facilities')
+            toast.success('Facility Succesfully added', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            })
+        } else{
+                toast.error('Something went wrong', {
+                position: "top-center",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+        })
+    }}
 
     return (
         <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-sky-50 py-14 px-4">

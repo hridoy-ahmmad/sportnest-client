@@ -1,16 +1,19 @@
+'use client'
 import { Button, Card } from '@heroui/react';
 import Image from 'next/image';
 import React from 'react';
 import { FaLocationDot, FaPeopleRoof } from 'react-icons/fa6';
 import { HiOutlineCalendarDays, HiOutlineClock } from 'react-icons/hi2';
 import { MdOutlineEmail, MdOutlinePriceChange } from 'react-icons/md';
-import { CancelBooking } from './CancelBooking';
 import { BiEditAlt } from 'react-icons/bi';
 import { FaTrashAlt } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
+import { DeleteFacilityModal } from './DeleteFacilityModal';
 
 const ManageCard = ({ item }) => {
+    const router = useRouter()
     const {
-        image,
+        image_url,
         name,
         price_per_hour,
         _id,
@@ -18,13 +21,27 @@ const ManageCard = ({ item }) => {
         capacity
     } = item;
 
+    const handleDelete = async () => {
+        const res = await fetch(`http://localhost:5000/facilities/${_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const result = await res.json()
+        if (result.deletedCount > 0) {
+            router.refresh()
+        }
+    }
+
+
     return (
         <Card className="w-full mt-3 bg-white border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 rounded-2xl overflow-hidden flex flex-col sm:flex-row items-stretch">
             {/* Image Section */}
             <div className="w-full sm:w-48 h-48 sm:h-auto relative shrink-0">
                 <Image
                     fill
-                    src={image}
+                    src={image_url}
                     alt={name}
                     className="object-cover"
                     priority
@@ -44,7 +61,7 @@ const ManageCard = ({ item }) => {
                             </p>
                             <div className="flex items-baseline gap-1.5">
                                 <span className="text-xs font-semibold text-gray-400 uppercase tracking-tight">
-                                    Facility:
+                                    Facility Name:
                                 </span>
                                 <h2 className="text-lg font-bold text-gray-800 leading-snug">
                                     {name}
@@ -78,29 +95,27 @@ const ManageCard = ({ item }) => {
                     {/* Right Content: Desktop Cancel Button */}
                     <div className="hidden md:block shrink-0 ">
                         <div className='flex flex-col gap-2 items-end'>
-                                <Button>
-                                    <BiEditAlt /> Edit Facility
-                                </Button>
-                            
-                                <Button variant='danger'>
-                                    <FaTrashAlt /> Remove Facility
-                                </Button>
-                            </div>
+                            <Button>
+                                <BiEditAlt /> Edit Facility
+                            </Button>
+                            <DeleteFacilityModal handleDelete={handleDelete} />
+
                         </div>
                     </div>
                 </div>
+            </div>
 
-                {/* Bottom Section: Footer Line & Contact */}
-                <div className="pt-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-
-
-                    {/* Mobile/Tablet Cancel Button */}
-                    <div className="block md:hidden w-full">
-                        {/* ---------- */}
+            {/* Bottom Section: Footer Line & Contact */}
+            <div className="pt-3 border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
 
 
-                    </div>
+                {/* Mobile/Tablet Cancel Button */}
+                <div className="block md:hidden w-full">
+                    {/* ---------- */}
+
+
                 </div>
+            </div>
         </Card>
     );
 };
