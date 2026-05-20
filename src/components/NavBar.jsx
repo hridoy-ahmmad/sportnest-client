@@ -12,7 +12,6 @@ const NavBar = () => {
     const { data: session } = authClient.useSession()
     const [isOpen, setIsOpen] = useState(false)
 
-    
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'All Facilities', path: '/all-facilities' },
