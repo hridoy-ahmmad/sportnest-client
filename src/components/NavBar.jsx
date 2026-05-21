@@ -7,10 +7,13 @@ import React, { useState } from 'react'
 
 import { FiMenu, FiX } from 'react-icons/fi'
 import { NavDropDown } from './NavDropDown'
+import { toast } from 'react-toastify'
+import { useRouter } from 'next/navigation'
 
 const NavBar = () => {
     const { data: session } = authClient.useSession()
     const [isOpen, setIsOpen] = useState(false)
+    const router = useRouter()
 
     const navLinks = [
         { name: 'Home', path: '/' },
@@ -19,10 +22,11 @@ const NavBar = () => {
         { name: 'Add Facility', path: '/add-facility' },
         { name: 'Manage Facilities', path: '/manage-facilities' },
     ]
-
     const handleLogout = async () => {
+        setIsOpen(false)
         await authClient.signOut()
-        alert('Logged out successfully')
+        toast.success('Logout successful')
+        router.push('/')
     }
 
     return (
@@ -59,7 +63,7 @@ const NavBar = () => {
                     </nav>
 
                     {/* Desktop Button */}
-                    <div className="hidden lg:flex gap-2 items-center">
+                    <nav className="hidden lg:flex gap-2 items-center">
                         {session?.user ? (
                             <div>
                                 <NavDropDown />
@@ -69,11 +73,13 @@ const NavBar = () => {
                                 <Link href="/login">Login</Link>
                             </Button>
                         )}
-                    </div>
+                    </nav>
 
                     {/* Mobile Menu Button */}
                     <button
                         onClick={() => setIsOpen(!isOpen)}
+                        aria-expanded={isOpen}
+                        aria-label="Toggle navigation menu"
                         className="lg:hidden w-11 h-11 flex items-center justify-center rounded-xl bg-blue-50 text-blue-700 transition-all"
                     >
                         {isOpen ? <FiX size={24} /> : <FiMenu size={24} />}
@@ -97,18 +103,25 @@ const NavBar = () => {
                         ))}
                     </nav>
 
-                    <div className="mt-4 flex items-center gap-2">
-                        <Button className="w-full bg-gradient-to-r from-sky-500 to-blue-700 text-white rounded-xl font-semibold">
-                            <Link href="/login">Login</Link>
-                        </Button>
-                        <Button
-                            onClick={handleLogout}
-                            variant="danger"
-                            className="rounded-xl"
-                        >
-                            Log Out
-                        </Button>
-                    </div>
+                    <nav className="mt-4 flex items-center gap-2">
+
+                        {
+                            session?.user ? <Button
+                                onClick={handleLogout}
+                                variant="danger"
+                                className="rounded-xl"
+                            >
+                                Log Out
+                            </Button> : <Button
+                                onClick={() => setIsOpen(false)}
+                                className="w-full bg-linear-to-r from-sky-500 to-blue-700 text-white rounded-xl font-semibold"
+                            >
+                                <Link href="/login">Login</Link>
+                            </Button>
+                        }
+
+
+                    </nav>
                 </div>
             </div>
         </header>

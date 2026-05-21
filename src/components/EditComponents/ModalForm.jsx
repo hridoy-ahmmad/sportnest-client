@@ -1,5 +1,6 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Button, FieldError, Form, Input, Label, ListBox, Modal, Surface, TextField, Select } from "@heroui/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -32,10 +33,14 @@ export function ModalForm({ item }) {
             image_url: allData.image,
             available_slots: slots
         }
+
+        const { data: token } = await authClient.token()
+
         const res = await fetch(`http://localhost:5000/facilities/${_id}`, {
             method: 'PATCH',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${token?.token}`
             },
             body: JSON.stringify(data)
         })
@@ -52,7 +57,7 @@ export function ModalForm({ item }) {
                 progress: undefined,
                 theme: "light",
             })
-        }else{
+        } else {
             toast.error('something went wrong')
         }
 

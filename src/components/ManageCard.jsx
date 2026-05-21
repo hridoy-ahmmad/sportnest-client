@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { DeleteFacilityModal } from './DeleteFacilityModal';
 
 import { ModalForm } from './EditComponents/ModalForm';
+import { authClient } from '@/lib/auth-client';
 
 const ManageCard = ({ item }) => {
     const router = useRouter()
@@ -22,10 +23,12 @@ const ManageCard = ({ item }) => {
     } = item;
 
     const handleDelete = async () => {
+        const { data:token } = await authClient.token()
         const res = await fetch(`http://localhost:5000/facilities/${_id}`, {
             method: 'DELETE',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${token?.token}`
             }
         })
         const result = await res.json()

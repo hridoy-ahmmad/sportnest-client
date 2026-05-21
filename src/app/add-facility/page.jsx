@@ -34,11 +34,13 @@ const AddFacility = () => {
             date: new Date()
         }
         // console.log(data.slots.toString());
+        const { data: token } = await authClient.token()
 
         const res = await fetch('http://localhost:5000/facilities', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                authorization: `Bearer ${token?.token}`
             },
             body: JSON.stringify(facilityData)
         })
@@ -56,8 +58,8 @@ const AddFacility = () => {
                 progress: undefined,
                 theme: "light",
             })
-        } else{
-                toast.error('Something went wrong', {
+        } else {
+            toast.error('Something went wrong', {
                 position: "top-center",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -66,8 +68,9 @@ const AddFacility = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-        })
-    }}
+            })
+        }
+    }
 
     return (
         <div className="min-h-screen bg-linear-to-br from-slate-50 via-white to-sky-50 py-14 px-4">
