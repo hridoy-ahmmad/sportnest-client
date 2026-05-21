@@ -13,7 +13,7 @@ const BookNow = async ({ params }) => {
         headers: await headers()
     })
 
-    const res = await fetch(`http://localhost:5000/facilities/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${id}`, {
         cache: 'no-store',
         headers: {
             authorization: `Bearer ${token}`

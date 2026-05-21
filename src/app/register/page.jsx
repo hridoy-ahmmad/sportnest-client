@@ -15,7 +15,6 @@ const RegisterPage = () => {
         const formData = new FormData(e.currentTarget)
         const userInfo = Object.fromEntries(formData.entries())
         // console.log(userInfo);
-
         const { data, error } = await authClient.signUp.email({
             email: userInfo.email,
             password: userInfo.password,
@@ -23,7 +22,6 @@ const RegisterPage = () => {
             image: userInfo.photo,
             rememberMe: true,
         });
-
         if (data?.user) {
             toast.success('Register successful', {
                 position: "top-center",
@@ -49,8 +47,6 @@ const RegisterPage = () => {
                 theme: "light",
             });
         }
-
-
     }
     const handleGoogleLogin = async () => {
         const data = await authClient.signIn.social({

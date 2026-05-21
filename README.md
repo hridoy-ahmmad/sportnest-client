@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SportNest Client
 
-## Getting Started
+## Purpose
 
-First, run the development server:
+SportNest is a sports facility booking platform where users can discover facilities, view details, book available slots, manage their bookings, and let facility owners add, update, or remove their own facilities.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Live URL
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+https://sportnest-client-rosy.vercel.app
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- User registration and login with email/password.
+- Google social login support.
+- JWT-based protected API requests with Better Auth.
+- Browse all sports facilities.
+- View detailed facility information.
+- Book facilities with date, time slot, and duration selection.
+- View personal booking list.
+- Cancel existing bookings.
+- Add new facilities as an authenticated user.
+- Manage, edit, and delete owned facilities.
+- Protected routes for booking and facility management pages.
+- Responsive navigation with mobile menu support.
+- Toast notifications for success and error feedback.
 
-## Learn More
+## NPM Packages Used
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `next`
+- `react`
+- `react-dom`
+- `better-auth`
+- `@better-auth/mongo-adapter`
+- `mongodb`
+- `@heroui/react`
+- `@heroui/styles`
+- `react-icons`
+- `react-toastify`
+- `react-spinners`
+- `react-multivalue-text-input`
+- `@gravity-ui/icons`
+- `tailwindcss`
+- `@tailwindcss/postcss`
+- `daisyui`
+- `eslint`
+- `eslint-config-next`
+- `babel-plugin-react-compiler`

@@ -24,7 +24,7 @@ const ManageCard = ({ item }) => {
 
     const handleDelete = async () => {
         const { data:token } = await authClient.token()
-        const res = await fetch(`http://localhost:5000/facilities/${_id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities/${_id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',

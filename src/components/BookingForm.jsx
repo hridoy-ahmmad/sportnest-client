@@ -26,10 +26,12 @@ const BookingForm = ({ data }) => {
             location: data.location,
             status: 'pending'
         }
-        const res = await fetch(`http://localhost:5000/bookings`, {
+        const { data: token } = await authClient.token()
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/bookings`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${token?.token}`
             },
             body: JSON.stringify(bookingData)
         })
@@ -45,7 +47,7 @@ const BookingForm = ({ data }) => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-        
+
             });
             router.push('/my-bookings')
         } else {

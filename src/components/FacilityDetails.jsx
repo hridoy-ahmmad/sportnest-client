@@ -32,8 +32,8 @@ const FacilityDetails = ({ data }) => {
                     {/* Image Section */}
                     <div className="relative overflow-hidden rounded-3xl border border-gray-200 shadow-xs">
                         <Image
-                            src={image_url || "/placeholder.jpg"} 
-                            alt={name || "Facility Image"}
+                            src={image_url} 
+                            alt={name}
                             width={800}
                             height={600}
                             className="w-full h-[300px] sm:h-[450px] object-cover"

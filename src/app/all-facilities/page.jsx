@@ -2,7 +2,7 @@ import FacilityCard from '@/components/FacilityCard';
 import React from 'react';
 
 const AllFaculties = async () => {
-    const res = await fetch('http://localhost:5000/facilities')
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/facilities`)
     const data = await res.json()
     console.log(data);
     
