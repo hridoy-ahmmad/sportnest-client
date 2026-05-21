@@ -13,7 +13,15 @@ const ManageFacility = async () => {
         headers: await headers()
     })
     const user = session?.user
-    const res = await fetch(`http://localhost:5000/facilities/user/${user.id}`)
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+
+    const res = await fetch(`http://localhost:5000/facilities/user/${user.id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
     const data = await res.json()
     console.log(data);
 
